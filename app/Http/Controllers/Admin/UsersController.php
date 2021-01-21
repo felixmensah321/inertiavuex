@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,6 +19,27 @@ class UsersController extends Controller
     {
         $users = User::all();
 //        dd($users);
+        /*Profile::create([
+            'user_id' => 1,
+           'company' => 'SQLI',
+           'cellnumber' => '0123456789',
+           'email' => 'tettehfelix880@yahoo.com',
+           'role' => 'admin'
+        ]);
+        Profile::create([
+            'user_id' => 2,
+            'company' => 'Citruse',
+            'cellnumber' => '0123456789',
+            'email' => 'tettehfelix080@yahoo.com',
+            'role' => 'sales'
+        ]);
+        Profile::create([
+            'user_id' => 3,
+            'company' => 'SQLICitruse',
+            'cellnumber' => '0123456789',
+            'email' => 'tettehfelix80@yahoo.com',
+            'role' => 'manager'
+        ]);*/
         return Inertia::render('Admin/Index',['users' => $users]);
     }
 
@@ -50,7 +72,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $userProfile = User::find($id)->profile;
+        return $userProfile;
     }
 
     /**
